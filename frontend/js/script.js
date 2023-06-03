@@ -1,71 +1,71 @@
 let pessoal = {
     "ANSELMO PADILHA TESKE": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "ANSELMO"
     },
     "BRUNO CARDOSO": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "BRUNO C."
     },
     "BRUNO HOBOLD": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "BRUNO H."
     },
     "DOUGLAS ASSUNÇÃO RAMPINELLI": {
-        "url": "./img/DOUGLAS.jpg",
+        "url": "../img/DOUGLAS.jpg",
         "status": "ATIVO",
         "apelido": "DOUGLAS"
     },
     "EDUARDO PEDRO MENEGHEL": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "EDUARDO"
     },
     "ILSON WARMELING": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "ILSON"
     },
     "JUAN CARLOS REDIVO": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "JUAN"
     },
     "JULIAN BUSS SATURNO": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "JULIAN"
     },
     "JOÃO VITOR MORAES": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "JOÃO"
     },
     "LEANDRO HEIDEMAN": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "LEANDRO"
     },
     "LUCAS CORREA NAZÁRIO": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "LUCAS C."
     },
     "LUCAS MICHELS": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "ATIVO",
         "apelido": "LUCAS M."
     },
     "YVAN AUGUSTO": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "PARCIAL",
         "apelido": "YVAN"
     },
     "GUSTAVO RODRIGUES": {
-        "url": "./img/user.png",
+        "url": "../img/user.png",
         "status": "NULO",
         "apelido": "GUSTAVO"
     }
