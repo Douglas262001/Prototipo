@@ -104,7 +104,7 @@ app.post('/login', async (req, res) => {
     app.put('/alunos/:codigoAluno', (req, res) => {
       const aluno = req.body;
       db.query(
-        'UPDATE conexao.alunos SET nome = ?, url = ?, status_aluno = ?, apelido = ?, motorista = ? WHERE id = ?',
+        'UPDATE prototipo.alunos SET nome = ?, url = ?, status_aluno = ?, apelido = ?, motorista = ? WHERE id = ?',
         [aluno.nome, aluno.url, aluno.status_aluno, aluno.apelido, aluno.motorista, req.params.codigoAluno],
         (err, result) => {
           if (err) {  //Utilizando return early pattern.
@@ -112,7 +112,7 @@ app.post('/login', async (req, res) => {
             return res.status(500).json({ message: 'Erro ao atualizar aluno' });
           }
   
-          return res.status(200).json(`Carro ${req.params.codigoAluno} atualizado`);
+          return res.status(200).json(`Aluno ${req.params.codigoAluno} atualizado`);
         }
       );
     });
