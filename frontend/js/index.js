@@ -40,6 +40,7 @@ function submitForm(event) {
         });
 }
 
+//CRUD Frontend Alunos
 const carregarAlunos = () => {
     fetch('http://localhost:3000/alunos')
         .then((response) => response.json())
@@ -126,6 +127,70 @@ const mostrarMensagem = (mensagem, corFundo = 'rgb(59 59 255 / 77%)') => {
     setTimeout(() => {
         document.getElementById(`mensagem-${codigoMensagem}`).remove();
     }, 5000);
+}
+
+//CRUD Frontend Motoristas
+const carregarMotoristas = () => {
+    fetch('http://localhost:3000/motoristas')
+        .then((response) => response.json())
+        .then((dados) => {
+            document.getElementById('conteudo-motoristas').innerHTML = dados.reverse().reduce((acumulador, motorista) => {
+                return acumulador + `
+                    <div style='display: flex; gap: 4px;'>
+                        <input id='motorista-id-${motorista.id}' disabled style='color: red; width: 50px;' value='${motorista.id}'></input>
+                        <input id='motorista-nome-${motorista.id}' style='color: red' value='${motorista.nome}'></input>
+                        <input id='aluno-idade-${motorista.id}' style='color: red' value='${motorista.idade}'></input>
+                        <button onclick="alterarMotorista(${motorista.id})">Alterar</button>
+                        <button onclick="excluirMotorista(${motorista.id})">Excluir</button>
+                    </div>
+                `;
+            }, '');
+        })
+}
+
+const alterarMotorista = (id) => {
+    const nome = document.getElementById(`aluno-nome-${id}`).value;
+    const idade = document.getElementById(`aluno-idade-${id}`).value;
+    fetch(`http://localhost:3000/motoristas/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({nome: nome, idade: idade})
+    }).then(async (resposta) => {
+        mostrarMensagem(await resposta.json());
+        carregarMotoristas();
+    })
+}
+
+const excluirMotorista = (id) => {
+    fetch(`http://localhost:3000/Motoristas/${id}`, {
+        method: 'DELETE',
+    }).then(async (resposta) => {
+        mostrarMensagem(await resposta.json(), 'rgb(255 59 59 / 77%)');
+        carregarMotoristas();
+    })
+}
+
+const inserirMotorista = (motorista = {}) => {
+    const nome = document.getElementById('nome').value;
+    const idade = document.getElementById('idade').value;
+    fetch('http://localhost:3000/motoristas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({nome: nome, idade: idade})
+    }).then(async (resposta) => {
+        mostrarMensagem(await resposta.json(), 'rgb(59 255 59 / 77%)');
+        limparCamposMotorista();
+        carregarMotoristas();
+    })
+}
+
+const limparCamposMotorista = () => {
+    document.getElementById('nome').value = '';
+    document.getElementById('idade').value = '';
 }
 
 // Função para enviar o formulário de cadastro
