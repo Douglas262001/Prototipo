@@ -16,10 +16,10 @@ function submitForm(event) {
             if (response.ok) {
                 return response.json(); // Converte a resposta para JSON
             } else if (response.status === 401) {
-                console.log('Credenciais inválidas');
+                alert('Credenciais inválidas');
                 throw new Error('Credenciais inválidas');
             } else {
-                console.log('Erro ao autenticar usuário');
+                alert.log('Erro ao autenticar usuário');
                 throw new Error('Erro ao autenticar usuário');
             }
         })
@@ -33,9 +33,10 @@ function submitForm(event) {
             // Salva os dados do usuário no localStorage
             localStorage.setItem('userData', JSON.stringify(dadosUsuario));
 
-            window.location.href = "cadastroAlunosMotoristas";
+            window.location.href = "cadastroAlunosMotoristas.html";
         })
         .catch(error => {
             console.error('Erro ao obter os dados do usuário:', error);
         });
 }
+
