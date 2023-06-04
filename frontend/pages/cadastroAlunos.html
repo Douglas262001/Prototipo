@@ -1,0 +1,26 @@
+<html>
+    <head> 
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <script src="../js/index.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <button onclick="carregarAlunos()">Carregar Alunos</button>
+            <br></br>
+            <div>
+                <input id="nome" placeholder="Nome"></input>
+                <input id="url" placeholder="URL"></input>
+                <input id="status_aluno" placeholder="Status Aluno"></input>
+                <input id="apelido" placeholder="Apelido"></input>
+                <input id="motorista" placeholder="Motorista"></input>
+                <button onclick="inserirAluno()">Inserir</button>
+            </div>
+            <div id="conteudo-alunos">
+                <h1>
+                    Clique no botão de carregar alunos para ver a lista.
+                </h1>
+            </div>
+            <div id="mensagens" style="display: flex; flex-flow: column; gap: 4px; position: fixed; top: 0; bottom: 0; right: 0; width: 200px; z-index: 2; pointer-events: none;">
+            </div>
+        </div>
+</html>
