@@ -133,7 +133,7 @@ app.put('/alunos/:codigoAluno', (req, res) => {
   );
 });
 
-//motoristas
+//Motoristas
 app.get('/motoristas', (req, res) => {
   db.query('SELECT * FROM prototipo.motoristas ORDER BY id DESC', (err, result) => {
     if (err) {

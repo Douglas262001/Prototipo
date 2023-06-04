@@ -33,7 +33,7 @@ function submitForm(event) {
             // Salva os dados do usuário no localStorage
             localStorage.setItem('userData', JSON.stringify(dadosUsuario));
 
-            window.location.href = "cadastroAlunosMotoristas.html";
+            window.location.href = "principalUsuarios.html";
         })
         .catch(error => {
             console.error('Erro ao obter os dados do usuário:', error);
