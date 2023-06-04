@@ -127,3 +127,50 @@ const mostrarMensagem = (mensagem, corFundo = 'rgb(59 59 255 / 77%)') => {
         document.getElementById(`mensagem-${codigoMensagem}`).remove();
     }, 5000);
 }
+
+// Função para enviar o formulário de cadastro
+function cadastrarUsuario() {
+    // Capturar os valores dos campos do formulário
+    const nome = document.getElementById('nomeInput').value;
+    const email = document.getElementById('emailInput').value;
+    const senha = document.getElementById('senhaInput').value;
+
+    // Criar um objeto com os dados do usuário
+    const usuario = {
+      nome: nome,
+      email: email,
+      senha: senha
+    };
+
+    // Enviar a solicitação POST para o servidor
+    fetch('http://localhost:3000/usuarios', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(usuario)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao cadastrar usuário');
+        }
+      })
+      .then(data => {
+        // Exibir mensagem de sucesso para o usuário
+        alert(`Usuário ${data} cadastrado com sucesso!`);
+      })
+      .catch(error => {
+        // Exibir mensagem de erro para o usuário
+        console.error(error);
+        alert('Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.');
+      });
+  }
+
+  // Capturar o evento de submissão do formulário
+  const form = document.getElementById('cadastroForm');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitar o envio do formulário padrão
+    cadastrarUsuario();
+  });
