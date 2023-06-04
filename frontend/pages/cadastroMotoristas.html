@@ -1,24 +1,26 @@
+<!DOCTYPE html>
 <html>
-    <head> 
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
-        <script src="../js/index.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <button onclick="carregarMotoristas()">Carregar Motoristas</button>
-            <br></br>
-            <div>
-                <input id="nome" placeholder="Nome"></input>
-                <input id="idade" placeholder="Idade"></input>
-                <button onclick="inserirMotorista()">Inserir</button>
-            </div>
-            <div id="conteudo-motoristas">
-                <h1>
-                    Clique no botão de carregar motoristas para ver a lista.
-                </h1>
-            </div>
-            <div id="mensagens" style="display: flex; flex-flow: column; gap: 4px; position: fixed; top: 0; bottom: 0; right: 0; width: 200px; z-index: 2; pointer-events: none;">
-            </div>
+<head> 
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../js/index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <button onclick="carregarMotoristas()">Carregar Motoristas</button>
+        <br><br>
+        <div>
+            <input id="nome" placeholder="Nome">
+            <input id="idade" placeholder="Idade">
+            <button onclick="inserirMotorista()">Inserir</button>
         </div>
-    </body>
+        <div id="conteudo-motoristas">
+            <h1>
+                Clique no botão de carregar motoristas para ver a lista.
+            </h1>
+        </div>
+        <div id="mensagens" style="display: flex; flex-flow: column; gap: 4px; position: fixed; top: 0; bottom: 0; right: 0; width: 200px; z-index: 2; pointer-events: none;">
+        </div>
+        <button class="back-button" onclick="window.history.back()">Voltar</button>
+    </div>
+</body>
 </html>
