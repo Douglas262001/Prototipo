@@ -5,7 +5,7 @@ function submitForm(event) {
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
 
-    fetch('http://localhost:3000/usuario', {
+    fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -24,20 +24,16 @@ function submitForm(event) {
             }
         })
         .then(data => {
-            const empresaUsuario = data.empresa;
             const nomeUsuario = data.nome;
-            const imagemUsuario = data.imagem;
             const dadosUsuario = {
-                empresa: empresaUsuario,
                 nome: nomeUsuario,
-                imagem: imagemUsuario
             };
             console.log(dadosUsuario)
             console.log(data)
             // Salva os dados do usuário no localStorage
             localStorage.setItem('userData', JSON.stringify(dadosUsuario));
 
-            window.location.href = "index.html";
+            window.location.href = "cadastroAlunosMotoristas";
         })
         .catch(error => {
             console.error('Erro ao obter os dados do usuário:', error);
