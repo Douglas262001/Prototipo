@@ -17,6 +17,17 @@ app.get('/', (req, res) => {
   res.json('teste mysql');
 });
 
+//usuários
+app.get('/usuarios', (req, res) => {
+  db.query('SELECT * FROM conexao.usuarios', (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 //Login usuário
 app.post('/login', async (req, res) => {
     const { email, senha } = req.body;
@@ -29,7 +40,7 @@ app.post('/login', async (req, res) => {
     try {
       // Consulta o usuário no banco de dados pelo email
       const [rows] = await db.promise().query(
-        'SELECT u.*, e.nome AS nome_empresa FROM conexao.usuarios u INNER JOIN conexao.empresas e ON u.empresa = e.id WHERE u.email = ? AND u.senha = ?',
+        'SELECT * FROM conexao.usuarios WHERE email = ? AND senha = ?',
         [email, senha]
       );
   
@@ -38,13 +49,10 @@ app.post('/login', async (req, res) => {
         return res.status(401).json({ message: 'Credenciais inválidas' });
       }
   
-      const empresaUsuario = rows[0].nome_empresa;
       const nomeUsuario = rows[0].nome;
-      const imagemUsuario = rows[0].imagem;
-      const idUsuario = rows[0].id;
   
       // Retorna o nome do usuário, imagem e empresa
-      return res.status(200).json({ empresa: empresaUsuario, nome: nomeUsuario, imagem: imagemUsuario });
+      return res.status(200).json({ nome: nomeUsuario});
     } catch (err) {
       console.error(err);
       return res.status(500).json({ message: 'Erro ao autenticar usuário' });
