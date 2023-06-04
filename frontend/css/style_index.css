@@ -53,3 +53,8 @@ body {
 .back-button {
     margin-top: 20px;
 }
+
+img {
+  border-radius: 70px;
+  height: 80px;
+}
