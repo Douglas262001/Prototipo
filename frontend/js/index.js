@@ -139,7 +139,7 @@ const carregarMotoristas = () => {
                     <div style='display: flex; gap: 4px;'>
                         <input id='motorista-id-${motorista.id}' disabled style='color: red; width: 50px;' value='${motorista.id}'></input>
                         <input id='motorista-nome-${motorista.id}' style='color: red' value='${motorista.nome}'></input>
-                        <input id='aluno-idade-${motorista.id}' style='color: red' value='${motorista.idade}'></input>
+                        <input id='motorista-idade-${motorista.id}' style='color: red' value='${motorista.idade}'></input>
                         <button onclick="alterarMotorista(${motorista.id})">Alterar</button>
                         <button onclick="excluirMotorista(${motorista.id})">Excluir</button>
                     </div>
@@ -149,8 +149,8 @@ const carregarMotoristas = () => {
 }
 
 const alterarMotorista = (id) => {
-    const nome = document.getElementById(`aluno-nome-${id}`).value;
-    const idade = document.getElementById(`aluno-idade-${id}`).value;
+    const nome = document.getElementById(`motorista-nome-${id}`).value;
+    const idade = document.getElementById(`motorista-idade-${id}`).value;
     fetch(`http://localhost:3000/motoristas/${id}`, {
         method: 'PUT',
         headers: {
