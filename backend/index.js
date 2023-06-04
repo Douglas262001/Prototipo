@@ -28,6 +28,22 @@ app.get('/usuarios', (req, res) => {
   });
 });
 
+app.post('/usuarios', (req, res) => {
+  const usuario = req.body;
+  db.query(
+    'INSERT INTO prototipo.usuarios (nome, email, senha) VALUES (?, ?, ?)',
+    [usuario.nome, usuario.email, usuario.senha],
+    (err, result) => {
+      if (err) {  //Utilizando return early pattern.
+        console.error(err);
+        return res.status(500).json({ message: 'Erro ao cadastrar usuário' });
+      }
+
+      return res.status(200).json(`Aluno ${usuario.nome} criado`);;
+    }
+  );
+});
+
 //Login usuário
 app.post('/login', async (req, res) => {
     const { email, senha } = req.body;
