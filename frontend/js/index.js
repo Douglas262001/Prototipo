@@ -40,3 +40,90 @@ function submitForm(event) {
         });
 }
 
+const carregarAlunos = () => {
+    fetch('http://localhost:3000/alunos')
+        .then((response) => response.json())
+        .then((dados) => {
+            document.getElementById('conteudo-alunos').innerHTML = dados.reverse().reduce((acumulador, aluno) => {
+                return acumulador + `
+                    <div style='display: flex; gap: 4px;'>
+                        <input id='aluno-id-${aluno.id}' disabled style='color: red; width: 50px;' value='${aluno.id}'></input>
+                        <input id='aluno-nome-${aluno.id}' style='color: red' value='${aluno.nome}'></input>
+                        <input id='aluno-url-${aluno.id}' style='color: red' value='${aluno.url}'></input>
+                        <input id='aluno-status_aluno-${aluno.id}' style='color: red' value='${aluno.status_aluno}'></input>
+                        <input id='aluno-apelido-${aluno.id}' style='color: red' value='${aluno.apelido}'></input>
+                        <input id='aluno-motorista-${aluno.id}' style='color: red' value='${aluno.motorista}'></input>
+                        <button onclick="alterarAluno(${aluno.id})">Alterar</button>
+                        <button onclick="excluirAluno(${aluno.id})">Excluir</button>
+                    </div>
+                `;
+            }, '');
+        })
+}
+
+const alterarAluno = (id) => {
+    const nome = document.getElementById(`aluno-nome-${id}`).value;
+    const url = document.getElementById(`aluno-url-${id}`).value;
+    const status_aluno = document.getElementById(`aluno-status_aluno-${id}`).value;
+    const apelido = document.getElementById(`aluno-apelido-${id}`).value;
+    const motorista = document.getElementById(`aluno-motorista-${id}`).value;
+    fetch(`http://localhost:3000/alunos/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({nome: nome, url: url, status_aluno: status_aluno, apelido: apelido, motorista: motorista})
+    }).then(async (resposta) => {
+        mostrarMensagem(await resposta.json());
+        carregarAlunos();
+    })
+}
+
+const excluirAluno = (id) => {
+    fetch(`http://localhost:3000/alunos/${id}`, {
+        method: 'DELETE',
+    }).then(async (resposta) => {
+        mostrarMensagem(await resposta.json(), 'rgb(255 59 59 / 77%)');
+        carregarAlunos();
+    })
+}
+
+const inserirAluno = (aluno = {}) => {
+    const nome = document.getElementById('nome').value;
+    const url = document.getElementById('url').value;
+    const status_aluno = document.getElementById('status_aluno').value;
+    const apelido = document.getElementById('apelido').value;
+    const motorista = document.getElementById('motorista').value;
+    fetch('http://localhost:3000/alunos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({nome: nome, url: url, status_aluno: status_aluno, apelido: apelido, motorista: motorista})
+    }).then(async (resposta) => {
+        mostrarMensagem(await resposta.json(), 'rgb(59 255 59 / 77%)');
+        limparCampos();
+        carregarAlunos();
+    })
+}
+
+const limparCampos = () => {
+    document.getElementById('nome').value = '';
+    document.getElementById('url').value = '';
+    document.getElementById('status_aluno').value = '';
+    document.getElementById('apelido').value = '';
+    document.getElementById('motorista').value = '';
+}
+
+const mostrarMensagem = (mensagem, corFundo = 'rgb(59 59 255 / 77%)') => {
+    const codigoMensagem = Math.random();
+    const div = document.createElement('div');
+    div.id = `mensagem-${codigoMensagem}`;
+    div.innerText = mensagem;
+    div.style = `background: ${corFundo}; color: white; padding: 10px;`;
+    const elementoMensagens = document.getElementById('mensagens');
+    elementoMensagens.insertBefore(div, elementoMensagens.firstChild);
+    setTimeout(() => {
+        document.getElementById(`mensagem-${codigoMensagem}`).remove();
+    }, 5000);
+}
