@@ -19,7 +19,7 @@ function submitForm(event) {
                 alert('Credenciais inválidas');
                 throw new Error('Credenciais inválidas');
             } else {
-                alert.log('Erro ao autenticar usuário');
+                alert('Erro ao autenticar usuário');
                 throw new Error('Erro ao autenticar usuário');
             }
         })
@@ -136,7 +136,7 @@ const carregarMotoristas = () => {
         .then((dados) => {
             document.getElementById('conteudo-motoristas').innerHTML = dados.reverse().reduce((acumulador, motorista) => {
                 return acumulador + `
-                    <div style='display: flex; gap: 4px;'>
+                    <div style='display: flex; gap: 4px; margin-bottom: -5px;'>
                         <input id='motorista-id-${motorista.id}' disabled style='color: red; width: 50px;' value='${motorista.id}'></input>
                         <input id='motorista-nome-${motorista.id}' style='color: red' value='${motorista.nome}'></input>
                         <input id='motorista-idade-${motorista.id}' style='color: red' value='${motorista.idade}'></input>
