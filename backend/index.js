@@ -75,6 +75,37 @@ app.post('/login', async (req, res) => {
   }
 });
 
+//Login motorista
+app.post('/loginMotorista', async (req, res) => {
+  const { email, senha } = req.body;
+
+  // Verifica se o email e a senha foram fornecidos
+  if (!email || !senha) {
+    return res.status(400).json({ message: 'Informe o email e a senha' });
+  }
+
+  try {
+    // Consulta o usuário no banco de dados pelo email
+    const [rows] = await db.promise().query(
+      'SELECT * FROM prototipo.motoristas WHERE email = ? AND senha = ?',
+      [email, senha]
+    );
+
+    // Verifica se o usuário existe
+    if (!rows || rows.length === 0) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+
+    const nomeMotorista = rows[0].nome;
+
+    // Retorna o nome do usuário, imagem e empresa
+    return res.status(200).json({ nome: nomeMotorista });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Erro ao autenticar login do motorista' });
+  }
+});
+
 //Alunos
 app.get('/alunos', (req, res) => {
   db.query('SELECT * FROM prototipo.alunos ORDER BY id DESC', (err, result) => {

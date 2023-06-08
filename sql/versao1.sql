@@ -24,7 +24,9 @@ CREATE TABLE prototipo.alunos (
 CREATE TABLE prototipo.motoristas (
   id INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(50) NOT NULL,
-  idade INT NOT NULL
+  idade INT NOT NULL,
+  email VARCHAR(40) NOT NULL,
+  senha VARCHAR(10) NOT NULL
 );
 
 INSERT INTO prototipo.usuarios (id, nome, email, senha) 
@@ -49,6 +51,6 @@ INSERT INTO prototipo.alunos (nome, url, status_aluno, apelido, motorista) VALUE
   ('YVAN AUGUSTO', ' ', 'PARCIAL', 'YVAN', 1),
   ('GUSTAVO RODRIGUES', ' ', 'NULO', 'GUSTAVO', 1);
   
-INSERT INTO prototipo.motoristas (id, nome, idade) 
-VALUES (1, 'Rodrigo', 34);
+INSERT INTO prototipo.motoristas (id, nome, idade, email, senha) 
+VALUES (1, 'Rodrigo', 34, 'motorista1@empresa.net', 'senha123');
   
