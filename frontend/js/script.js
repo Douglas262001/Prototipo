@@ -95,7 +95,7 @@ function buscarAlunosDoBancoDeDados() {
     let csv = 'data:text/csv;charset=utf-8,';
     csv += 'Data,Hora,Local\n';
     csv += `${data.value},${hora.value},${local.value}\n`;
-    csv += 'Situacao,apelido,status\n';
+    csv += 'Situação,Apelido,Status\n';
     selectedCards.forEach(card => {
       csv += `PRESENTE,${card.apelido},${card.status_aluno}\n`;
     });
