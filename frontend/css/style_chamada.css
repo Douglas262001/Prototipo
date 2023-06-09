@@ -130,3 +130,7 @@ button {
 .logout-button:hover {
   background-color: #CC0000;
 }
+
+#local {
+  font-size: 1rem;
+}

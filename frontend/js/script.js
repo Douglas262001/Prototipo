@@ -72,6 +72,18 @@ function buscarAlunosDoBancoDeDados() {
     }
     return chunkedArray;
   }
+
+  var localizacao = document.getElementById('local');
+
+  function success(pos) {
+    localizacao.textContent = `Latitude:${pos.coords.latitude}, Longitude:${pos.coords.longitude}`;
+  }
+  
+  function error(err) {
+    console.log(err);
+  }
+  
+  var watchID = navigator.geolocation.watchPosition(success, error);
   
   const exportarCsvBtn = document.getElementById('exportar-csv');
   exportarCsvBtn.addEventListener('click', function () {
@@ -80,7 +92,7 @@ function buscarAlunosDoBancoDeDados() {
     const allCards = document.querySelectorAll('.card');
     const data = document.getElementById('dia');
     const hora = document.getElementById('hora');
-    const local = document.getElementById('local');
+    const localElement = document.getElementById('local');
   
     allCards.forEach(card => {
       const apelido = card.querySelector('h5').innerText;
@@ -94,7 +106,7 @@ function buscarAlunosDoBancoDeDados() {
   
     let csv = 'data:text/csv;charset=utf-8,';
     csv += 'Data,Hora,Local\n';
-    csv += `${data.value},${hora.value},${local.value}\n`;
+    csv += `${data.value},${hora.value},${localElement.textContent}\n`;
     csv += 'Situação,Apelido,Status\n';
     selectedCards.forEach(card => {
       csv += `PRESENTE,${card.apelido},${card.status_aluno}\n`;
@@ -109,7 +121,7 @@ function buscarAlunosDoBancoDeDados() {
     link.setAttribute('download', 'cartoes.csv');
     document.body.appendChild(link);
     link.click();
-  });
+  });  
   
   function filtrarPorTipo(tipoSelecionado) {
     const cards = document.querySelectorAll('.card');
@@ -128,4 +140,3 @@ function buscarAlunosDoBancoDeDados() {
   tipoSelect.addEventListener('change', function () {
     filtrarPorTipo(this.value);
   });
-  
