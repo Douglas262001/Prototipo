@@ -1,7 +1,7 @@
 const listaPessoal = [];
 
 function buscarAlunosDoBancoDeDados() {
-    fetch('http://localhost:3000/alunos')
+    fetch('http://localhost:3000/alunosCrescente')
       .then(response => response.json())
       .then(result => {
         listaPessoal.length = 0; // Limpa a listaPessoal antes de preenchê-la novamente

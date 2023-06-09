@@ -108,6 +108,16 @@ app.post('/loginMotorista', async (req, res) => {
 
 //Alunos
 app.get('/alunos', (req, res) => {
+  db.query('SELECT * FROM prototipo.alunos ORDER BY id DESC', (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get('/alunosCrescente', (req, res) => {
   db.query('SELECT * FROM prototipo.alunos', (err, result) => {
     if (err) {
       console.error(err);
