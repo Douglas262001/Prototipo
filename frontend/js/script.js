@@ -118,7 +118,7 @@ function buscarAlunosDoBancoDeDados() {
     const encodedUri = encodeURI(csv);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'cartoes.csv');
+    link.setAttribute('download', 'lista de presenca.csv');
     document.body.appendChild(link);
     link.click();
   });  
