@@ -108,7 +108,7 @@ app.post('/loginMotorista', async (req, res) => {
 
 //Alunos
 app.get('/alunos', (req, res) => {
-  db.query('SELECT * FROM prototipo.alunos ORDER BY id DESC', (err, result) => {
+  db.query('SELECT * FROM prototipo.alunos', (err, result) => {
     if (err) {
       console.error(err);
     } else {

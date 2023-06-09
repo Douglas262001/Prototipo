@@ -55,7 +55,7 @@ function buscarAlunosDoBancoDeDados() {
       criarLinha(linha, pessoas);
     });
   
-    criarLinha(linha, listaPessoal.slice(12)); // Cria a última linha com os elementos restantes
+    criarLinha(linha, listaPessoal.size); // Cria a última linha com os elementos restantes
   
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
