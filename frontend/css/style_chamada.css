@@ -115,3 +115,18 @@ button {
  button:focus:not(:focus-visible) {
   outline: none;
  }
+
+ .logout-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #FF0000;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #CC0000;
+}
