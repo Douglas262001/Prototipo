@@ -110,6 +110,40 @@ function buscarAlunosDoBancoDeDados() {
   // Iniciar a primeira chamada à função success
   navigator.geolocation.getCurrentPosition(success, error);
 
+// Captura o elemento HTML
+var dataHorarioElement = document.getElementById("data-horario");
+
+// Função para formatar o número com zero à esquerda se for menor que 10
+function formatNumber(number) {
+  return number < 10 ? "0" + number : number;
+}
+
+// Função para obter a data e o horário local
+function getDataHorarioLocal() {
+  var dataAtual = new Date();
+  var dia = formatNumber(dataAtual.getDate());
+  var mes = formatNumber(dataAtual.getMonth() + 1);
+  var ano = dataAtual.getFullYear();
+  var hora = formatNumber(dataAtual.getHours());
+  var minutos = formatNumber(dataAtual.getMinutes());
+  var segundos = formatNumber(dataAtual.getSeconds());
+
+  var dataHorarioLocal = dia + "/" + mes + "/" + ano + " " + hora + ":" + minutos + ":" + segundos;
+
+  return dataHorarioLocal;
+}
+
+// Função para atualizar o horário
+function atualizarHorario() {
+  dataHorarioElement.textContent = getDataHorarioLocal();
+}
+
+// Chama a função para atualizar o horário imediatamente
+atualizarHorario();
+
+// Atualiza o horário a cada minuto (60.000 milissegundos)
+setInterval(atualizarHorario, 60000);
+
   const exportarCsvBtn = document.getElementById('exportar-csv');
   exportarCsvBtn.addEventListener('click', function () {
     let selectedCards = [];
@@ -131,11 +165,18 @@ function buscarAlunosDoBancoDeDados() {
   
     let csv = 'data:text/csv;charset=utf-8,';
     csv += 'Data,Hora,Local\n';
-    csv += `${data.value},${hora.value},${localElement.textContent}\n`;
+    // Obter data e horário local
+    var dataAtual = new Date();
+    var dataLocal = dataAtual.toLocaleDateString();
+    var horarioLocal = dataAtual.toLocaleTimeString();
+
+    csv += `${dataLocal},${horarioLocal},${localElement.textContent}\n`;
     csv += 'Situação,Apelido,Status\n';
+
     selectedCards.forEach(card => {
       csv += `PRESENTE,${card.apelido},${card.status_aluno}\n`;
     });
+
     unselectedCards.forEach(card => {
       csv += `FALTA,${card.apelido},${card.status_aluno}\n`;
     });
