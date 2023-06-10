@@ -61,8 +61,8 @@ function submitFormMotorista(event) {
                 alert('Credenciais inválidas');
                 throw new Error('Credenciais inválidas');
             } else {
-                alert('Erro ao autenticar usuário');
-                throw new Error('Erro ao autenticar usuário');
+                alert('Erro ao autenticar motorista');
+                throw new Error('Erro ao autenticar motorista');
             }
         })
         .then(data => {
@@ -182,6 +182,8 @@ const carregarMotoristas = () => {
                         <input id='motorista-id-${motorista.id}' disabled style='color: red; width: 50px;' value='${motorista.id}'></input>
                         <input id='motorista-nome-${motorista.id}' style='color: red' value='${motorista.nome}'></input>
                         <input id='motorista-idade-${motorista.id}' style='color: red' value='${motorista.idade}'></input>
+                        <input id='motorista-email-${motorista.id}' style='color: red' value='${motorista.email}'></input>
+                        <input id='motorista-senha-${motorista.id}' style='color: red' value='${motorista.senha}'></input>
                         <button onclick="alterarMotorista(${motorista.id})">Alterar</button>
                         <button onclick="excluirMotorista(${motorista.id})">Excluir</button>
                     </div>
@@ -193,12 +195,14 @@ const carregarMotoristas = () => {
 const alterarMotorista = (id) => {
     const nome = document.getElementById(`motorista-nome-${id}`).value;
     const idade = document.getElementById(`motorista-idade-${id}`).value;
+    const email = document.getElementById(`motorista-email-${id}`).value;
+    const senha = document.getElementById(`motorista-senha-${id}`).value;
     fetch(`http://localhost:3000/motoristas/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({nome: nome, idade: idade})
+        body: JSON.stringify({nome: nome, idade: idade, email: email, senha: senha})
     }).then(async (resposta) => {
         mostrarMensagem(await resposta.json());
         carregarMotoristas();
@@ -217,12 +221,14 @@ const excluirMotorista = (id) => {
 const inserirMotorista = (motorista = {}) => {
     const nome = document.getElementById('nome').value;
     const idade = document.getElementById('idade').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
     fetch('http://localhost:3000/motoristas', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({nome: nome, idade: idade})
+        body: JSON.stringify({nome: nome, idade: idade, email: email, senha: senha})
     }).then(async (resposta) => {
         mostrarMensagem(await resposta.json(), 'rgb(59 255 59 / 77%)');
         limparCamposMotorista();
@@ -233,6 +239,8 @@ const inserirMotorista = (motorista = {}) => {
 const limparCamposMotorista = () => {
     document.getElementById('nome').value = '';
     document.getElementById('idade').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('senha').value = '';
 }
 
 // Função para enviar o formulário de cadastro

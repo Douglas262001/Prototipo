@@ -48,7 +48,7 @@ select {
   margin-bottom: 10px;
 }
 
-#conteudo-alunos {
+#conteudo-alunos, #conteudo-motoristas {
   width: 1300px;
   height: 300px;
   overflow-y: auto;
