@@ -74,17 +74,42 @@ function buscarAlunosDoBancoDeDados() {
   }
 
   var localizacao = document.getElementById('local');
+  var intervalo = 60000; // Intervalo de 1 minuto (em milissegundos)
+  var watchID = null;
 
   function success(pos) {
-    localizacao.textContent = `Latitude:${pos.coords.latitude}, Longitude:${pos.coords.longitude}`;
+    var latitude = pos.coords.latitude;
+    var longitude = pos.coords.longitude;
+
+    // Fazer uma solicitação à API aqui para obter o endereço
+    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.address) {
+          var address = data.address;
+          var enderecoDescritivo = `${address.road}, ${address.town}, ${address.state}, ${address.country}`;
+          localizacao.textContent = enderecoDescritivo;
+        } else {
+          console.log('Erro na obtenção do endereço.');
+        }
+      })
+      .catch(error => {
+        console.log('Erro na requisição:', error);
+      });
+
+    // Agendar a próxima chamada à função success após o intervalo de tempo
+    watchID = setTimeout(() => {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }, intervalo);
   }
-  
+
   function error(err) {
     console.log(err);
   }
-  
-  var watchID = navigator.geolocation.watchPosition(success, error);
-  
+
+  // Iniciar a primeira chamada à função success
+  navigator.geolocation.getCurrentPosition(success, error);
+
   const exportarCsvBtn = document.getElementById('exportar-csv');
   exportarCsvBtn.addEventListener('click', function () {
     let selectedCards = [];
