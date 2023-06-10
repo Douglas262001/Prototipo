@@ -129,10 +129,6 @@ button {
   background-color: #CC0000;
 }
 
-#local {
-  font-size: 1rem;
-}
-
-#data-horario {
+#local, #data-horario{
   font-size: 1rem;
 }
