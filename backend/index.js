@@ -67,7 +67,6 @@ app.post('/login', async (req, res) => {
 
     const nomeUsuario = rows[0].nome;
 
-    // Retorna o nome do usuário, imagem e empresa
     return res.status(200).json({ nome: nomeUsuario });
   } catch (err) {
     console.error(err);
@@ -96,10 +95,9 @@ app.post('/loginMotorista', async (req, res) => {
       return res.status(401).json({ message: 'Credenciais inválidas' });
     }
 
-    const nomeMotorista = rows[0].nome;
+    const motoristaAluno = rows[0].id;
 
-    // Retorna o nome do usuário, imagem e empresa
-    return res.status(200).json({ nome: nomeMotorista });
+    return res.status(200).json({ id: motoristaAluno});
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Erro ao autenticar login do motorista' });
@@ -117,8 +115,10 @@ app.get('/alunos', (req, res) => {
   });
 });
 
-app.get('/alunosCrescente', (req, res) => {
-  db.query('SELECT * FROM prototipo.alunos', (err, result) => {
+app.get('/alunosMotorista/:motoristaAluno', (req, res) => {
+  db.query('SELECT * FROM prototipo.alunos WHERE motorista = ?',
+  [req.params.motoristaAluno],
+   (err, result) => {
     if (err) {
       console.error(err);
     } else {

@@ -1,27 +1,67 @@
+function submitFormMotorista(event) {
+  event.preventDefault(); // Impede o envio do formulário
+
+  // Obtém os valores de email e senha
+  const email = document.getElementById('email').value;
+  const senha = document.getElementById('senha').value;
+
+  fetch('http://localhost:3000/loginMotorista', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: email, senha: senha })
+  })
+      .then(response => {
+          if (response.ok) {
+              return response.json(); // Converte a resposta para JSON
+          } else if (response.status === 401) {
+              alert('Credenciais inválidas');
+              throw new Error('Credenciais inválidas');
+          } else {
+              alert('Erro ao autenticar motorista');
+              throw new Error('Erro ao autenticar motorista');
+          }
+      })
+      .then(data => {
+          const motorista = data.id;
+          dadosMotorista = motorista;
+          alert("Motorista: " + dadosMotorista + ", fez login!");
+          console.log(data)
+          // Salva os dados do usuário no localStorage
+          localStorage.setItem('idMotorista', JSON.stringify(dadosMotorista));
+
+          window.location.href = "chamadaAlunos.html";
+      })
+      .catch(error => {
+          console.error('Erro ao obter os dados do motorista:', error);
+      });
+}
+
 const listaPessoal = [];
 
 function buscarAlunosDoBancoDeDados() {
-    fetch('http://localhost:3000/alunosCrescente')
-      .then(response => response.json())
-      .then(result => {
-        listaPessoal.length = 0; // Limpa a listaPessoal antes de preenchê-la novamente
-  
-        result.forEach(aluno => {
-          const nome = aluno.nome;
-          const url = aluno.url;
-          const status_aluno = aluno.status_aluno;
-          const apelido = aluno.apelido;
-          const dadosAluno = { url, status_aluno, apelido };
-          listaPessoal.push(dadosAluno);
-        });
-  
-        criarTela(); // Chama a função para criar a tela com base na listaPessoal atualizada
-      })
-      .catch(error => console.error(error));
-  }
-  
-  // Chamada inicial para buscar os alunos do banco de dados e atualizar a listaPessoal
-  buscarAlunosDoBancoDeDados();
+  fetch(`http://localhost:3000/alunosMotorista/${localStorage.getItem('idMotorista')}`)
+    .then(response => response.json())
+    .then(result => {
+      listaPessoal.length = 0; // Limpa a listaPessoal antes de preenchê-la novamente
+
+      result.forEach(aluno => {
+        const nome = aluno.nome;
+        const url = aluno.url;
+        const status_aluno = aluno.status_aluno;
+        const apelido = aluno.apelido;
+        const dadosAluno = { url, status_aluno, apelido };
+        listaPessoal.push(dadosAluno);
+      });
+
+      criarTela(); // Chama a função para criar a tela com base na listaPessoal atualizada
+    })
+    .catch(error => console.error(error));
+}
+
+// Chamada inicial para buscar os alunos do banco de dados e atualizar a listaPessoal
+buscarAlunosDoBancoDeDados();
   
   function popularCard(telaCards, pessoa) {
     const url = pessoa.url;

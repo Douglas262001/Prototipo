@@ -54,4 +54,7 @@ INSERT INTO prototipo.alunos (nome, url, status_aluno, apelido, motorista) VALUE
   
 INSERT INTO prototipo.motoristas (id, nome, idade, email, senha) 
 VALUES (1, 'Rodrigo', 34, 'motorista1@empresa.net', 'senha123');
-  
+
+SELECT * FROM prototipo.alunos WHERE motorista = 2 ORDER BY id DESC;
+SELECT * FROM prototipo.motoristas;
+SELECT * FROM prototipo.motoristas m JOIN prototipo.alunos a ON m.id = a.motorista WHERE m.email = 'motorista2empresa.net' AND m.senha = 'senha456'
