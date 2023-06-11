@@ -28,7 +28,7 @@ function submitFormMotorista(event) {
           dadosMotorista = motorista;
           alert("Motorista: " + dadosMotorista + ", fez login!");
           console.log(data)
-          // Salva os dados do usuário no localStorage
+          // Salva os dados do motorista no localStorage
           localStorage.setItem('idMotorista', JSON.stringify(dadosMotorista));
 
           window.location.href = "chamadaAlunos.html";

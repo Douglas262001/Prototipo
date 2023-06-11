@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.json('teste mysql');
 });
 
-//usuários
+//Usuários
 app.get('/usuarios', (req, res) => {
   db.query('SELECT * FROM prototipo.usuarios', (err, result) => {
     if (err) {
@@ -34,7 +34,7 @@ app.post('/usuarios', (req, res) => {
     'INSERT INTO prototipo.usuarios (nome, email, senha) VALUES (?, ?, ?)',
     [usuario.nome, usuario.email, usuario.senha],
     (err, result) => {
-      if (err) {  //Utilizando return early pattern.
+      if (err) { 
         console.error(err);
         return res.status(500).json({ message: 'Erro ao cadastrar usuário' });
       }
@@ -44,7 +44,7 @@ app.post('/usuarios', (req, res) => {
   );
 });
 
-//Login usuário
+//Login Usuário
 app.post('/login', async (req, res) => {
   const { email, senha } = req.body;
 
@@ -84,13 +84,13 @@ app.post('/loginMotorista', async (req, res) => {
   }
 
   try {
-    // Consulta o usuário no banco de dados pelo email
+    // Consulta o motorista no banco de dados pelo email
     const [rows] = await db.promise().query(
       'SELECT * FROM prototipo.motoristas WHERE email = ? AND senha = ?',
       [email, senha]
     );
 
-    // Verifica se o usuário existe
+    // Verifica se o motorista existe
     if (!rows || rows.length === 0) {
       return res.status(401).json({ message: 'Credenciais inválidas' });
     }
@@ -133,7 +133,7 @@ app.post('/alunos', (req, res) => {
     'INSERT INTO prototipo.alunos (nome, url, status_aluno, apelido, motorista) VALUES (?, ?, ?, ?, ?)',
     [aluno.nome, aluno.url, aluno.status_aluno, aluno.apelido, aluno.motorista],
     (err, result) => {
-      if (err) {  //Utilizando return early pattern.
+      if (err) {
         console.error(err);
         return res.status(500).json({ message: 'Erro ao criar aluno' });
       }
@@ -148,7 +148,7 @@ app.delete('/alunos/:codigoAluno', (req, res) => {
     'DELETE FROM prototipo.alunos WHERE id = ?',
     [req.params.codigoAluno],
     (err, result) => {
-      if (err) {  //Utilizando return early pattern.
+      if (err) {
         console.error(err);
         return res.status(500).json({ message: 'Erro ao excluir aluno' });
       }
@@ -164,7 +164,7 @@ app.put('/alunos/:codigoAluno', (req, res) => {
     'UPDATE prototipo.alunos SET nome = ?, url = ?, status_aluno = ?, apelido = ?, motorista = ? WHERE id = ?',
     [aluno.nome, aluno.url, aluno.status_aluno, aluno.apelido, aluno.motorista, req.params.codigoAluno],
     (err, result) => {
-      if (err) {  //Utilizando return early pattern.
+      if (err) { 
         console.error(err);
         return res.status(500).json({ message: 'Erro ao atualizar aluno' });
       }
@@ -206,7 +206,7 @@ app.delete('/motoristas/:codigoMotorista', (req, res) => {
     'DELETE FROM prototipo.motoristas WHERE id = ?',
     [req.params.codigoMotorista],
     (err, result) => {
-      if (err) {  //Utilizando return early pattern.
+      if (err) { 
         console.error(err);
         return res.status(500).json({ message: 'Erro ao excluir motorista' });
       }
@@ -222,7 +222,7 @@ app.put('/motoristas/:codigoMotorista', (req, res) => {
     'UPDATE prototipo.motoristas SET nome = ?, idade = ? WHERE id = ?',
     [motorista.nome, motorista.idade, req.params.codigoMotorista],
     (err, result) => {
-      if (err) {  //Utilizando return early pattern.
+      if (err) { 
         console.error(err);
         return res.status(500).json({ message: 'Erro ao atualizar motorista' });
       }
