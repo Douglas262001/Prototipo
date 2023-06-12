@@ -63,9 +63,20 @@ img {
   height: 80px;
 }
 
-@media only screen and (max-width: 600px) {
-  /* Estilos para dispositivos móveis com largura máxima de 600px */
+@media (max-width: 1000px) {
   .container {
-    margin-top: 50px;
+    width: 100%;
+    max-width: 80%;
+    height: 500px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  img {
+    border-radius: 70px;
+    height: 100px;
   }
 }
