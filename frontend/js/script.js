@@ -241,6 +241,71 @@ setInterval(atualizarHorario, 60000);
     });
   }
   
+  /* Tentando enviar os dados de presença para o banco de dados
+  function enviarDadosParaServidor() {
+    const allCards = document.querySelectorAll('.card');
+    const data_horario = document.getElementById('data-horario');
+    const localElement = document.getElementById('local');
+  
+    let selectedCards = [];
+    let unselectedCards = [];
+  
+    allCards.forEach((card) => {
+      const apelido = card.querySelector('h5').innerText;
+      const status_aluno = card.querySelector('p').innerText;
+      if (card.classList.contains('bg-success')) {
+        selectedCards.push({ apelido, status_aluno });
+      } else {
+        unselectedCards.push({ apelido, status_aluno });
+      }
+    });
+  
+    const presenca = [];
+  
+    selectedCards.forEach((card) => {
+      presenca.push({
+        data_horario: data_horario.textContent,
+        local: localElement.textContent,
+        apelido: card.apelido,
+        status_aluno: card.status_aluno,
+      });
+    });
+  
+    unselectedCards.forEach((card) => {
+      presenca.push({
+        data_horario: data_horario.textContent,
+        local: localElement.textContent,
+        apelido: card.apelido,
+        status_aluno: card.status_aluno,
+      });
+    });
+  
+    const requestData = { presenca };
+  
+    fetch('/marcar-presenca', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Dados enviados com sucesso para o servidor!');
+        } else {
+          console.error('Erro ao enviar dados para o servidor:', response.status);
+          console.log(requestData);
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao enviar dados para o servidor:', error);
+      });
+  }
+  
+  const enviarDadosBtn = document.getElementById('enviar-dados'); //Nome do Botão
+  enviarDadosBtn.addEventListener('click', enviarDadosParaServidor);  
+  */
+
   // Adiciona o manipulador de eventos para o elemento select
   const tipoSelect = document.getElementById('tipo-select');
   tipoSelect.addEventListener('change', function () {

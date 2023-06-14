@@ -57,4 +57,17 @@ VALUES (1, 'Rodrigo', 34, 'motorista1@empresa.net', 'senha123');
 
 SELECT * FROM prototipo.alunos WHERE motorista = 2 ORDER BY id DESC;
 SELECT * FROM prototipo.motoristas;
-SELECT * FROM prototipo.motoristas m JOIN prototipo.alunos a ON m.id = a.motorista WHERE m.email = 'motorista2empresa.net' AND m.senha = 'senha456'
+SELECT * FROM prototipo.motoristas m JOIN prototipo.alunos a ON m.id = a.motorista WHERE m.email = 'motorista2empresa.net' AND m.senha = 'senha456';
+SELECT * FROM prototipo.alunos WHERE motorista_nome = 2;
+
+CREATE TABLE prototipo.presenca (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  data_horario DATETIME,
+  localizacao VARCHAR(255),
+  apelido VARCHAR(255),
+  status_aluno VARCHAR(255)
+);
+
+SELECT * FROM prototipo.presenca;
+
+DROP TABLE prototipo.presenca;

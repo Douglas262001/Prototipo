@@ -232,6 +232,79 @@ app.put('/motoristas/:codigoMotorista', (req, res) => {
   );
 });
 
+/* Tentando enviar os dados de presença para o banco de dados
+app.post('/marcar-presenca', (req, res) => {
+  
+  const { presenca } = req.body;
+
+  // Verifica se a lista de presenças está vazia
+  if (!presenca || presenca.length === 0) {
+    return res.status(400).json({ message: 'A lista de presenças está vazia' });
+  }
+
+  // Array para armazenar as consultas SQL
+  const queries = [];
+
+  // Itera sobre a lista de presenças e cria as consultas SQL para marcar a presença de cada uma
+  presenca.forEach(({ data_horario, localizacao, apelido, status_aluno }) => {
+    const query = `
+      INSERT INTO presenca (data_horario, localizacao, apelido, status_aluno)
+      VALUES (?, ?, ?, ?)
+    `;
+    const values = [data_horario, localizacao, apelido, status_aluno];
+    queries.push({ query, values });
+  });
+
+  // Executa as consultas SQL em uma única transação
+  db.getConnection((err, connection) => {
+    if (err) {
+      console.error('Erro ao obter conexão do banco de dados:', err);
+      return res.status(500).json({ message: 'Erro ao marcar presença dos alunos' });
+    }
+
+    connection.beginTransaction((err) => {
+      if (err) {
+        console.error('Erro ao iniciar transação do banco de dados:', err);
+        return res.status(500).json({ message: 'Erro ao marcar presença dos alunos' });
+      }
+
+      // Executa as consultas SQL em uma única transação
+      const promises = queries.map(({ query, values }) => {
+        return new Promise((resolve, reject) => {
+          connection.query(query, values, (err, result) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          });
+        });
+      });
+
+      // Executa todas as consultas em paralelo
+      Promise.all(promises)
+        .then(() => {
+          connection.commit((err) => {
+            if (err) {
+              console.error('Erro ao commitar transação do banco de dados:', err);
+              return res.status(500).json({ message: 'Erro ao marcar presença dos alunos' });
+            }
+
+            connection.release();
+            return res.status(200).json({ message: 'Presença dos alunos marcada com sucesso' });
+          });
+        })
+        .catch((err) => {
+          console.error('Erro ao executar consultas do banco de dados:', err);
+          connection.rollback(() => {
+            connection.release();
+            return res.status(500).json({ message: 'Erro ao marcar presença dos alunos' });
+          });
+        });
+    });
+  });
+});
+*/
 http.createServer({}, app).listen(3000, () => {
   console.log(`Serviço iniciado`);
 });
