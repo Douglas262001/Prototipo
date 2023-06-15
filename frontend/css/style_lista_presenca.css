@@ -1,14 +1,31 @@
 /* CSS para a página de presença */
 body {
+  display: flex;
+  flex-direction: column;
   font-family: Arial, sans-serif;
   background-color: #eef7ef;
   margin: 0;
   padding: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
   text-align: center;
   color: #227f22;
+}
+
+button {
+  margin: 0 auto;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 #tabela-presenca {
