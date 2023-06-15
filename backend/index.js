@@ -188,10 +188,10 @@ app.get('/motoristas', (req, res) => {
 app.post('/motoristas', (req, res) => {
   const motorista = req.body;
   db.query(
-    'INSERT INTO prototipo.motoristas (nome, idade) VALUES (?, ?)',
-    [motorista.nome, motorista.idade],
+    'INSERT INTO prototipo.motoristas (nome, idade, email, senha) VALUES (?, ?, ?, ?)',
+    [motorista.nome, motorista.idade, motorista.email, motorista.senha],
     (err, result) => {
-      if (err) {  //Utilizando return early pattern.
+      if (err) { 
         console.error(err);
         return res.status(500).json({ message: 'Erro ao criar motorista' });
       }
@@ -219,8 +219,8 @@ app.delete('/motoristas/:codigoMotorista', (req, res) => {
 app.put('/motoristas/:codigoMotorista', (req, res) => {
   const motorista = req.body;
   db.query(
-    'UPDATE prototipo.motoristas SET nome = ?, idade = ? WHERE id = ?',
-    [motorista.nome, motorista.idade, req.params.codigoMotorista],
+    'UPDATE prototipo.motoristas SET nome = ?, idade = ?, email = ?, senha = ? WHERE id = ?',
+    [motorista.nome, motorista.idade, motorista.email, motorista.senha, req.params.codigoMotorista],
     (err, result) => {
       if (err) { 
         console.error(err);
