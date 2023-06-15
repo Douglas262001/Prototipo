@@ -241,11 +241,12 @@ setInterval(atualizarHorario, 60000);
     });
   }
   
-  /* Tentando enviar os dados de presença para o banco de dados
+  // Enviando os dados de presença do aluno
   function enviarDadosParaServidor() {
     const allCards = document.querySelectorAll('.card');
-    const data_horario = document.getElementById('data-horario');
     const localElement = document.getElementById('local');
+    const local = localElement.textContent;
+    console.log(local)
   
     let selectedCards = [];
     let unselectedCards = [];
@@ -253,6 +254,7 @@ setInterval(atualizarHorario, 60000);
     allCards.forEach((card) => {
       const apelido = card.querySelector('h5').innerText;
       const status_aluno = card.querySelector('p').innerText;
+      
       if (card.classList.contains('bg-success')) {
         selectedCards.push({ apelido, status_aluno });
       } else {
@@ -264,8 +266,7 @@ setInterval(atualizarHorario, 60000);
   
     selectedCards.forEach((card) => {
       presenca.push({
-        data_horario: data_horario.textContent,
-        local: localElement.textContent,
+        local: local,
         apelido: card.apelido,
         status_aluno: card.status_aluno,
       });
@@ -273,16 +274,17 @@ setInterval(atualizarHorario, 60000);
   
     unselectedCards.forEach((card) => {
       presenca.push({
-        data_horario: data_horario.textContent,
-        local: localElement.textContent,
+        local: local,
         apelido: card.apelido,
         status_aluno: card.status_aluno,
       });
+      console.log(local)
     });
   
     const requestData = { presenca };
+    console.log(requestData, 77)
   
-    fetch('/marcar-presenca', {
+    fetch('http://localhost:3000/marcarPresenca', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -302,9 +304,8 @@ setInterval(atualizarHorario, 60000);
       });
   }
   
-  const enviarDadosBtn = document.getElementById('enviar-dados'); //Nome do Botão
+  const enviarDadosBtn = document.getElementById('enviar-dados');
   enviarDadosBtn.addEventListener('click', enviarDadosParaServidor);  
-  */
 
   // Adiciona o manipulador de eventos para o elemento select
   const tipoSelect = document.getElementById('tipo-select');

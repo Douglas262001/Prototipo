@@ -232,8 +232,8 @@ app.put('/motoristas/:codigoMotorista', (req, res) => {
   );
 });
 
-/* Tentando enviar os dados de presença para o banco de dados
-app.post('/marcar-presenca', (req, res) => {
+//Enviando dados de presença para o banco
+app.post('/marcarPresenca', (req, res) => {
   
   const { presenca } = req.body;
 
@@ -244,14 +244,14 @@ app.post('/marcar-presenca', (req, res) => {
 
   // Array para armazenar as consultas SQL
   const queries = [];
-
+  console.log(presenca)
   // Itera sobre a lista de presenças e cria as consultas SQL para marcar a presença de cada uma
-  presenca.forEach(({ data_horario, localizacao, apelido, status_aluno }) => {
+  presenca.forEach(({local, apelido, status_aluno }) => {
     const query = `
-      INSERT INTO presenca (data_horario, localizacao, apelido, status_aluno)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO presenca (localizacao, apelido, status_aluno)
+      VALUES (?, ?, ?)
     `;
-    const values = [data_horario, localizacao, apelido, status_aluno];
+    const values = [local, apelido, status_aluno];
     queries.push({ query, values });
   });
 
@@ -304,7 +304,7 @@ app.post('/marcar-presenca', (req, res) => {
     });
   });
 });
-*/
+
 http.createServer({}, app).listen(3000, () => {
   console.log(`Serviço iniciado`);
 });

@@ -62,12 +62,16 @@ SELECT * FROM prototipo.alunos WHERE motorista_nome = 2;
 
 CREATE TABLE prototipo.presenca (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  data_horario DATETIME,
+  data_horario timestamp default current_timestamp,
   localizacao VARCHAR(255),
   apelido VARCHAR(255),
-  status_aluno VARCHAR(255)
+  status_aluno VARCHAR(255),
+  presenca VARCHAR(255)
 );
 
-SELECT * FROM prototipo.presenca;
+SELECT * 
+FROM prototipo.presenca 
+where DATE_FORMAT(data_horario, '%d/%m/%Y') = DATE_FORMAT(sysdate(), '%d/%m/%Y') 
+order by apelido;
 
 DROP TABLE prototipo.presenca;
