@@ -1,3 +1,36 @@
+fetch('http://localhost:3000/presenca')
+  .then(response => response.json())
+  .then(data => {
+    const tabelaPresenca = document.getElementById('tabela-presenca');
+    const tituloPresenca = document.getElementById('titulo-presenca');
+    const dataHorario = new Date(data[0].data_horario);
+
+    // Formatação da data
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dataFormatada = dataHorario.toLocaleDateString('pt-BR', options);
+
+    tituloPresenca.textContent = `Dados de Presença - ${dataFormatada}`;
+
+    data.forEach(row => {
+      const newRow = tabelaPresenca.insertRow();
+
+      const localizacaoCell = newRow.insertCell();
+      localizacaoCell.textContent = row.localizacao;
+
+      const apelidoCell = newRow.insertCell();
+      apelidoCell.textContent = row.apelido;
+
+      const statusCell = newRow.insertCell();
+      statusCell.textContent = row.status_aluno;
+
+      const presencaCell = newRow.insertCell();
+      presencaCell.textContent = row.presenca;
+    });
+  })
+  .catch(error => {
+    console.error('Erro ao obter os dados de presença:', error);
+  });
+
 function submitFormMotorista(event) {
   event.preventDefault(); // Impede o envio do formulário
 

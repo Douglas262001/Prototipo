@@ -232,6 +232,17 @@ app.put('/motoristas/:codigoMotorista', (req, res) => {
   );
 });
 
+//Presença
+app.get('/presenca', (req, res) => {
+  db.query('SELECT * FROM prototipo.presenca', (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 //Enviando dados de presença para o banco
 app.post('/marcarPresenca', (req, res) => {
   

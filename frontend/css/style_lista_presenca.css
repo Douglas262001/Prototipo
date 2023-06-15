@@ -1,0 +1,38 @@
+/* CSS para a página de presença */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eef7ef;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #227f22;
+}
+
+#tabela-presenca {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#tabela-presenca th {
+  background-color: #227f22;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+#tabela-presenca td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#tabela-presenca tr:nth-child(even) {
+  background-color: #d5e8d5;
+}
+
+#tabela-presenca tr:last-child td {
+  border-bottom: none;
+}
