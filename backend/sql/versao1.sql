@@ -65,6 +65,9 @@ CREATE TABLE prototipo.presenca (
 );
 
 SELECT * FROM prototipo.presenca;
+SELECT * FROM prototipo.alunos;
+SELECT * FROM prototipo.motoristas;
+SELECT * FROM prototipo.usuarios;
 
 SELECT * 
 FROM prototipo.presenca 
