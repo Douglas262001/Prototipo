@@ -241,43 +241,32 @@ setInterval(atualizarHorario, 60000);
     });
   }
   
-  // Enviando os dados de presença do aluno
-  function enviarDadosParaServidor() {
-    const allCards = document.querySelectorAll('.card');
-    const localElement = document.getElementById('local');
-    const local = localElement.textContent;
-  
-    let selectedCards = [];
-    let unselectedCards = [];
-  
-    allCards.forEach((card) => {
-      const apelido = card.querySelector('h5').innerText;
-      const status_aluno = card.querySelector('p').innerText;
-      
-      if (card.classList.contains('bg-success')) {
-        selectedCards.push({ apelido, status_aluno });
-      } else {
-        unselectedCards.push({ apelido, status_aluno });
-      }
+// Enviando os dados de presença do aluno
+function enviarDadosParaServidor() {
+  const allCards = document.querySelectorAll('.card');
+  const localElement = document.getElementById('local');
+  const local = localElement.textContent;
+
+  const presenca = [];
+
+  allCards.forEach((card) => {
+    const apelido = card.querySelector('h5').innerText;
+    const status_aluno = card.querySelector('p').innerText;
+    let presencaAluno = " ";
+
+    if (card.classList.contains('bg-success')) {
+      presencaAluno = "PRESENTE";
+    } else {
+      presencaAluno = "AUSENTE";
+    }
+
+    presenca.push({
+      local: local,
+      apelido: apelido,
+      status_aluno: status_aluno,
+      presenca: presencaAluno
     });
-  
-    const presenca = [];
-  
-    selectedCards.forEach((card) => {
-      presenca.push({
-        local: local,
-        apelido: card.apelido,
-        status_aluno: card.status_aluno
-      });
-    });
-  
-    unselectedCards.forEach((card) => {
-      presenca.push({
-        local: local,
-        apelido: card.apelido,
-        status_aluno: card.status_aluno
-      });
-    });
+  });
   
     const requestData = { presenca };
   

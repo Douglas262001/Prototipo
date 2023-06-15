@@ -246,12 +246,12 @@ app.post('/marcarPresenca', (req, res) => {
   const queries = [];
 
   // Itera sobre a lista de presenças e cria as consultas SQL para marcar a presença de cada uma
-  presenca.forEach(({local, apelido, status_aluno}) => {
+  presenca.forEach(({local, apelido, status_aluno, presenca}) => {
     const query = `
-      INSERT INTO presenca (localizacao, apelido, status_aluno)
-      VALUES (?, ?, ?)
+      INSERT INTO presenca (localizacao, apelido, status_aluno, presenca)
+      VALUES (?, ?, ?, ?)
     `;
-    const values = [local, apelido, status_aluno];
+    const values = [local, apelido, status_aluno, presenca];
     queries.push({ query, values });
   });
 
