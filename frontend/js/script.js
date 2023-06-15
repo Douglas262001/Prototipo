@@ -246,7 +246,6 @@ setInterval(atualizarHorario, 60000);
     const allCards = document.querySelectorAll('.card');
     const localElement = document.getElementById('local');
     const local = localElement.textContent;
-    console.log(local)
   
     let selectedCards = [];
     let unselectedCards = [];
@@ -268,7 +267,7 @@ setInterval(atualizarHorario, 60000);
       presenca.push({
         local: local,
         apelido: card.apelido,
-        status_aluno: card.status_aluno,
+        status_aluno: card.status_aluno
       });
     });
   
@@ -276,13 +275,11 @@ setInterval(atualizarHorario, 60000);
       presenca.push({
         local: local,
         apelido: card.apelido,
-        status_aluno: card.status_aluno,
+        status_aluno: card.status_aluno
       });
-      console.log(local)
     });
   
     const requestData = { presenca };
-    console.log(requestData, 77)
   
     fetch('http://localhost:3000/marcarPresenca', {
       method: 'POST',
@@ -293,7 +290,7 @@ setInterval(atualizarHorario, 60000);
     })
       .then((response) => {
         if (response.ok) {
-          console.log('Dados enviados com sucesso para o servidor!');
+          alert('Dados enviados com sucesso para o servidor!');
         } else {
           console.error('Erro ao enviar dados para o servidor:', response.status);
           console.log(requestData);
